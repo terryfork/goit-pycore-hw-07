@@ -54,6 +54,11 @@ def add_birthday_helper():
 
 
 @input_error
+def birthdays_handler(params):
+    return get_upcoming_birthdays_handler([7])
+
+
+@input_error
 def show_birthday_handler(params):
     rec = book.find(params[0])
     if rec:
