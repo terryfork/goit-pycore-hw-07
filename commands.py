@@ -54,6 +54,19 @@ def add_birthday_helper():
 
 
 @input_error
+def show_birthday_handler(params):
+    rec = book.find(params[0])
+    if rec:
+        return str(rec.birthday)
+    else:
+        return "Contact not found"
+
+
+def show_birthday_helper():
+    return ['name']
+
+
+@input_error
 def change_handler(params):
     rec = book.find(params[0])
     if rec:

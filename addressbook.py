@@ -74,6 +74,9 @@ class Birthday(Field):
         greet_date = bd + timedelta(days=7-weekday) if weekday > 4 else bd
         return greet_date
 
+    def __str__(self):
+        return self.value.strftime(self.DATE_FORMAT)
+
 
 class Record:
     def __init__(self, name, phone):
