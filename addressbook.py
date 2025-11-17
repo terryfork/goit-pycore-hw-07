@@ -116,7 +116,8 @@ class Record:
     def __str__(self):
         return (
             f"Contact name: {self.name.value}, phones: "
-            f"{'; '.join(p.value for p in self.phones)}"
+            f"{'; '.join(p.value for p in self.phones)} "
+            f"birthday: {self.birthday}"
         )
 
 
@@ -151,7 +152,7 @@ class AddressBook(UserDict):
 
     def get_upcoming_birthdays(self, days):
         today = date.today()
-        upcom_bds = []
+        upcom_bds = {}
         for name, rec in self.data.items():
             if rec.birthday:
                 greet_date = rec.birthday.get_greet_date(today.year)
@@ -159,6 +160,5 @@ class AddressBook(UserDict):
                     greet_date = rec.birthday.get_greet_date(today.year+1)
                 delta = greet_date - today
                 if delta.days <= days:
-                    upcom_bds.append(rec)
-        return "\n".join(str(rec) for rec in upcom_bds)
-#        return upcom_bds
+                    upcom_bds[rec.name.value] = greet_date.strftime(Birthday.DATE_FORMAT)
+        return "\n".join(f"{name} - greeting date: {greet}" for name, greet in upcom_bds.items())

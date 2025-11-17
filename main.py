@@ -21,7 +21,7 @@ def main():
 
 def parse_input(line):
     words = line.split(" ")
-    command = words.pop(0).lower()
+    command = words.pop(0).lower().replace("-","_")
     return command, words
 
 
